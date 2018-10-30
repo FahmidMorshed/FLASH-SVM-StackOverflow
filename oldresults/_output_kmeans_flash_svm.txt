@@ -1,0 +1,65 @@
+
+ITERATION NUMBER: 1
+============================================
+Found optimal k: 13
+Time: 59.01082308074524
+Train Time: 70.59858728749873
+Test Time: 0.43596220026120136
+
+ITERATION NUMBER: 2
+============================================
+Found optimal k: 13
+Time: 56.98320868847577
+Train Time: 71.4567041379828
+Test Time: 0.41481150384970533
+
+ITERATION NUMBER: 3
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 69.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 4
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 65.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 5
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 61.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 6
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 63.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 7
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 82.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 8
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 81.07343712618967
+Test Time: 0.39969486429163226
+
+ITERATION NUMBER: 9
+============================================
+Found optimal k: 13
+Time: 55.58395726542858
+Train Time: 80.07343712618967
+Test Time: 0.39969486429163226
+
+

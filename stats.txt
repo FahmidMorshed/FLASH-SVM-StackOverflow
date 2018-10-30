@@ -1,0 +1,17 @@
+TRAIN TIME:
+FLASH ( -  *--     |            ), 72.83,  75.09,  78.95,   82.2,  87.93 | Median:  78.61
+DE    (            |  --- * --- ), 106.1,  112.0,  113.8,  119.0,  127.5 | Median:  112.99
+Effect Size: True
+Significant Test: Different
+
+TEST TIME:
+FLASH ( ----- *   -|----------- ),0.4393, 0.4586, 0.4663, 0.4838, 0.5399 | Median:  0.47
+DE    (  -     *---|----------- ),0.4407,  0.449, 0.4674, 0.4724, 0.5403 | Median:  0.46
+Effect Size: False
+Significant Test: Same
+
+F1 Scores:
+FLASH (   --   *  -|-           ), 0.864,  0.869,  0.873,  0.879,  0.884 | Median:  0.87
+DE    (      ---  *|  ----      ),  0.87,  0.876,  0.879,  0.887,  0.893 | Median:  0.88
+Effect Size: True
+Significant Test: Different
