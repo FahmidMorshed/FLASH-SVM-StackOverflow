@@ -5,11 +5,20 @@ import time
 
 
 # __author__ = 'WeiFu'
+# ACTUAL SETTINGS
 POPULATION_NUM = 10
 REPEATS = 60
 VALUE_F = 0.75
 VALUE_CR = 0.3
 LIFE = 5
+
+#TEMP
+# POPULATION_NUM = 10
+# REPEATS = 10
+# VALUE_F = 0.75
+# VALUE_CR = 0.3
+# LIFE = 3
+
 class BaseSearch(object):
     def __init__(self, learner, params_distribution, train_data, tune_data,
                  objective):

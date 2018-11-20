@@ -139,16 +139,6 @@ def optimalK(data, nrefs=3, maxClusters=15):
     # return (gaps.argmax() + 1, resultsdf)  # Plus 1 because index of 0 means 1 cluster is optimal, index 2 = 3 clusters are optimal
     return gaps.argmax()
 
-
-
-
-
-
-
-
-
-
-
 def results_SVM(predicted, test_Y, filename):
     # predicted = clf.predict(test_X)
     # labels: ["Duplicates", "DirectLink","IndirectLink", "Isolated"]

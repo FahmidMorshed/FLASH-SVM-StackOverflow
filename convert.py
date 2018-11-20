@@ -1,22 +1,58 @@
 import stats
 import numpy as np
 
+def viz_regular_results(de_src, flash_src, dest):
+
+    print("\nREGULAR DE vs FLASH:\n")
+    de_train_times = []
+    de_test_times = []
+    flash_train_times, flash_f1s = get_regular_time_f1(flash_src)
+    de_train_times, de_f1s = get_regular_time_f1(de_src)
+
+    print("TIME:")
+    print_tiles(flash_train_times, "FLASH", de_train_times, "DE   ")
+    print_effect_size(flash_train_times, de_train_times)
+    print_significant_test(flash_train_times, de_train_times)
+
+    print("\nF1 Scores:")
+    print_tiles(flash_f1s, "FLASH", de_f1s, "DE   ")
+    print_effect_size(flash_f1s, de_f1s)
+    print_significant_test(flash_f1s, de_f1s)
+
+def get_regular_time_f1(src):
+    total_time = []
+    f1_scores = []
+    lines = open(src, "r").readlines()
+    for line in lines:
+        if "Time:" in line:
+            total_time.append(float(line.split(": ")[1]))
+        elif "avg" in line:
+            processed_line = " ".join(line.split())
+            f1_scores.append(float(processed_line.split(" ")[5]))
+    return total_time, f1_scores
+
+
+
+
+
 def viz_kmean_results(de_src, flash_src, dest):
+
+    print("\nCLUSTERED DE vs FLASH:\n")
 
     de_train_times = []
     de_test_times = []
     flash_train_times, flash_test_times = get_test_train_times(flash_src)
     de_train_times, de_test_times = get_test_train_times(de_src)
 
-    print("TRAIN TIME:")
+    print("TIME:")
     print_tiles(flash_train_times, "FLASH", de_train_times, "DE   ")
     print_effect_size(flash_train_times, de_train_times)
     print_significant_test(flash_train_times, de_train_times)
-
-    print("\nTEST TIME:")
-    print_tiles(flash_test_times, "FLASH", de_test_times, "DE   ")
-    print_effect_size(flash_test_times, de_test_times)
-    print_significant_test(flash_test_times, de_test_times)
+    #
+    # print("\nTEST TIME:")
+    # print_tiles(flash_test_times, "FLASH", de_test_times, "DE   ")
+    # print_effect_size(flash_test_times, de_test_times)
+    # print_significant_test(flash_test_times, de_test_times)
 
 
     flash_f1s = get_macro_F1(flash_src.split(".")[0] + ".csv")

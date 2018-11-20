@@ -3,6 +3,8 @@ import random
 import timeit
 import warnings
 import zipfile
+
+import gensim
 import wget
 import numpy as np
 from sklearn import svm, metrics
@@ -19,10 +21,12 @@ from multiprocessing import Queue
 import multiprocessing as mp
 import pandas as pd
 from functools import partial
-###FAHID###
+import process
 
+###FAHID###
+NUM_OF_ITERATION = 10
 iteration_num = 0
-DEF_FOLD = 3
+DEF_FOLD = 10
 @study
 def run_FLASH_SVM(train_pd, test_pd, filename, onKmeans, repeats=1, fold=DEF_FOLD):
     """
@@ -221,9 +225,9 @@ def prepare_word2vec():
         zip_ref.extractall()
 
 
-if __name__ == "__main__":
 
-    viz_kmean_results("_output_kmeans_de_svm.txt", "_output_kmeans_flash_svm.txt", "test")
+def run_java_dataset():
+    print("RUNNING JAVA DATSET")
 
     word_src = "word2vecs_models"
     warnings.filterwarnings("ignore")
@@ -232,8 +236,8 @@ if __name__ == "__main__":
     elif len(os.listdir(word_src)) == 0:
         os.rmdir(word_src)
         prepare_word2vec()
-    for x in range(10):
-        experiment.iteration_num = x+1
+    for x in range(NUM_OF_ITERATION):
+        experiment.iteration_num = x + 1
 
         random.seed(x)
         np.random.seed(x)
@@ -247,22 +251,67 @@ if __name__ == "__main__":
         stop = timeit.default_timer()
         print("\nData Preprocessing time: ", stop - start)
 
-        # run_SVM_baseline(train_pd, test_pd, "_output_svm.txt")
-        # print("\nRun completed for baseline model: SVM--------------------------------------------------")
-        # run_tuning_SVM(train_pd, test_pd, "_output_de_svm.txt", False)
-        # print("\nRun completed for baseline model: DE SVM--------------------------------------------------")
-        # run_FLASH_SVM(train_pd, test_pd, "_output_flash_svm.txt", False)
-        # print("\nRun completed for FLASH model: FLASH SVM--------------------------------------------------")
+        run_SVM_baseline(train_pd, test_pd, "ResultsJava" + os.path.sep + "_output_svm.txt")
+        print("\nRun completed for baseline model: SVM--------------------------------------------------")
+        run_tuning_SVM(train_pd, test_pd, "ResultsJava" + os.path.sep + "_output_de_svm.txt", False)
+        print("\nRun completed for baseline model: DE SVM--------------------------------------------------")
+        run_FLASH_SVM(train_pd, test_pd, "ResultsJava" + os.path.sep + "_output_flash_svm.txt", False)
+        print("\nRun completed for FLASH model: FLASH SVM--------------------------------------------------")
 
-        run_kmeans(train_pd, test_pd, "_output_kmeans_de_svm.txt", isFlash=False)
+        run_kmeans(train_pd, test_pd, "ResultsJava" + os.path.sep + "_output_kmeans_de_svm.txt", isFlash=False)
         print("Run completed for Kmeans DE model--------------------------------------------------")
-        run_kmeans(train_pd, test_pd, "_output_kmeans_flash_svm.txt", isFlash=True)
+        run_kmeans(train_pd, test_pd, "ResultsJava" + os.path.sep + "_output_kmeans_flash_svm.txt", isFlash=True)
         print("Run completed for Kmean Flash model--------------------------------------------------")
 
 
-        #DONE MULTIPROCESSING
-        #TODO SCORE
-        #TODO ADD IFA SCORE
-        #TODO CHANGE EXPERIMENT TO DIFFERENT FILE
-        #TODO MODIFY FLASH TO MULTI LEVEL
-        #TODO ARC
+def run_python_dataset():
+    print("RUNNING PYTHON DATSET")
+    word_src = "PythonWord2vecs"
+    if not os.path.exists(word_src) or len(os.listdir(word_src)) == 0:
+        process.generate_word2vec('ProcessedDataPython' + os.path.sep, 'PythonWord2vecs' + os.path.sep, 10)
+    for x in range(NUM_OF_ITERATION):
+        experiment.iteration_num = x + 1
+        random.seed(x)
+        np.random.seed(x)
+
+        myword2vecs = [os.path.join(word_src, i) for i in os.listdir(word_src)
+                       if "." not in i]
+        random_file = random.randrange(0, len(myword2vecs))
+
+        # Preprocess data into test and train set
+        start = timeit.default_timer()
+        myword2vec = gensim.models.Word2Vec.load(myword2vecs[x])
+        train_pd, test_pd = process.get_processed_train_test_after_word2vec(myword2vec)
+        stop = timeit.default_timer()
+        print("\nData Preprocessing time: ", stop - start)
+
+        # run_SVM_baseline(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_svm.txt")
+        # print("\nRun completed for baseline model: SVM--------------------------------------------------")
+        # run_tuning_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_de_svm.txt", False)
+        # print("\nRun completed for baseline model: DE SVM--------------------------------------------------")
+        # run_FLASH_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_flash_svm.txt", False)
+        # print("\nRun completed for FLASH model: FLASH SVM--------------------------------------------------")
+        #
+        run_kmeans(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_kmeans_de_svm.txt", isFlash=False)
+        print("Run completed for Kmeans DE model--------------------------------------------------")
+        run_kmeans(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_kmeans_flash_svm.txt", isFlash=True)
+        print("Run completed for Kmean Flash model--------------------------------------------------")
+
+
+def preprocess_python():
+    process.process_dataset('StackoverflowPython' + os.path.sep, 'ProcessedDataPython' + os.path.sep)
+    process.generate_word2vec('ProcessedDataPython' + os.path.sep, 'PythonWord2vecs' + os.path.sep, 10)
+    myword2vec = gensim.models.Word2Vec.load('PythonWord2vecs' + os.path.sep + 'word2vec1')
+    process.get_processed_train_test_after_word2vec(myword2vec)
+
+
+if __name__ == "__main__":
+    #run_java_dataset()
+    run_python_dataset()
+
+
+    # viz_kmean_results("ResultsJava" + os.path.sep + "_output_kmeans_de_svm.txt",
+    #                   "ResultsJava" + os.path.sep + "_output_kmeans_flash_svm.txt", "clustering_stats.txt")
+    #
+    # viz_regular_results("ResultsJava" + os.path.sep + "_output_de_svm.txt",
+    #                   "ResultsJava" + os.path.sep + "_output_flash_svm.txt", "regular_stats.txt")
