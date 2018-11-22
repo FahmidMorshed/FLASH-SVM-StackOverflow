@@ -285,13 +285,13 @@ def run_python_dataset():
         stop = timeit.default_timer()
         print("\nData Preprocessing time: ", stop - start)
 
-        # run_SVM_baseline(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_svm.txt")
-        # print("\nRun completed for baseline model: SVM--------------------------------------------------")
-        # run_tuning_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_de_svm.txt", False)
-        # print("\nRun completed for baseline model: DE SVM--------------------------------------------------")
-        # run_FLASH_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_flash_svm.txt", False)
-        # print("\nRun completed for FLASH model: FLASH SVM--------------------------------------------------")
-        #
+        run_SVM_baseline(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_svm.txt")
+        print("\nRun completed for baseline model: SVM--------------------------------------------------")
+        run_tuning_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_de_svm.txt", False)
+        print("\nRun completed for baseline model: DE SVM--------------------------------------------------")
+        run_FLASH_SVM(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_flash_svm.txt", False)
+        print("\nRun completed for FLASH model: FLASH SVM--------------------------------------------------")
+
         run_kmeans(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_kmeans_de_svm.txt", isFlash=False)
         print("Run completed for Kmeans DE model--------------------------------------------------")
         run_kmeans(train_pd, test_pd, "ResultsPython" + os.path.sep + "_output_kmeans_flash_svm.txt", isFlash=True)
@@ -306,12 +306,11 @@ def preprocess_python():
 
 
 if __name__ == "__main__":
-    #run_java_dataset()
-    run_python_dataset()
+    # run_java_dataset()
+    # run_python_dataset()
 
+    viz_kmean_results("ResultsPython" + os.path.sep + "_output_kmeans_de_svm.txt",
+                      "ResultsPython" + os.path.sep + "_output_kmeans_flash_svm.txt", "clustering_stats.txt")
 
-    # viz_kmean_results("ResultsJava" + os.path.sep + "_output_kmeans_de_svm.txt",
-    #                   "ResultsJava" + os.path.sep + "_output_kmeans_flash_svm.txt", "clustering_stats.txt")
-    #
-    # viz_regular_results("ResultsJava" + os.path.sep + "_output_de_svm.txt",
-    #                   "ResultsJava" + os.path.sep + "_output_flash_svm.txt", "regular_stats.txt")
+    viz_regular_results("ResultsPython" + os.path.sep + "_output_de_svm.txt",
+                      "ResultsPython" + os.path.sep + "_output_flash_svm.txt", "regular_stats.txt")

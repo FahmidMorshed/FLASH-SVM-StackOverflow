@@ -1,0 +1,28 @@
+
+CLUSTERED DE vs FLASH:
+
+TIME:
+FLASH ( *          |            ), 138.5,  140.3,  141.3,  143.5,  145.2 | Median:  140.97
+DE    (            |     --- *- ), 213.3,  224.1,  228.0,  229.4,  237.6 | Median:  227.41
+Effect Size: True
+Significant Test: Different
+
+F1 Scores:
+FLASH (     -----  |*  ----     ), 0.462,  0.482,  0.492,  0.503,  0.517 | Median:  0.49
+DE    (         ---|  *  ----   ), 0.479,  0.493,    0.5,  0.511,  0.524 | Median:  0.5
+Effect Size: True
+Significant Test: Same
+
+REGULAR DE vs FLASH:
+
+TIME:
+FLASH (*           |            ), 409.8,  420.3,  445.2,  475.9,  673.3 | Median:  439.45
+DE    (            |       - *- ),3.444e+03, 3.704e+03, 3.847e+03, 3.928e+03, 4.201e+03 | Median:  3793.22
+Effect Size: True
+Significant Test: Different
+
+F1 Scores:
+FLASH (     -------|   * ----   ), 0.446,  0.493,  0.523,  0.535,  0.563 | Median:  0.53
+DE    (           -|---   *--   ), 0.491,  0.521,  0.538,  0.551,  0.563 | Median:  0.54
+Effect Size: True
+Significant Test: Same

@@ -261,7 +261,7 @@ def get_indirect(a, direct_list):
     return related
 
 
-def create_test_train(src, dest_dir, overwrite=True):
+def create_test_train(src, dest_dir, overwrite=False):
     start = timeit.default_timer()
     if overwrite is False and os.path.isfile(dest_dir + 'train.csv') and os.path.isfile(dest_dir + 'test.csv'):
         train = pandas.read_csv(dest_dir + 'train.csv')
@@ -382,6 +382,8 @@ def get_processed_train_test_after_word2vec(word2vec):
 
     train_pd = train_pd.rename(columns={"LinkType": "LinkTypeId"})
     test_pd = test_pd.rename(columns={"LinkType": "LinkTypeId"})
+    train_pd['LinkTypeId'] = train_pd['LinkTypeId'].apply(str)
+    test_pd['LinkTypeId'] = test_pd['LinkTypeId'].apply(str)
 
     return train_pd, test_pd
 

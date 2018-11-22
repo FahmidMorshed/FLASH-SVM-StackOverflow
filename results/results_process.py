@@ -17,7 +17,7 @@ def reports(src, template_src=os.path.sep.join([".", "results", "template_tuned"
     raw = open(src, "r").readlines()
     dict_raw_results = {}
     for line in raw:
-        if "400\n" in line.split(" ") or "avg" in line.split(" "):
+        if "349\n" in line.split(" ") or "400\n" in line.split(" ") or "avg" in line.split(" "):
             new_line = [i for i in line.split(" ") if len(i) >= 1]
             if new_line[0] == "avg":
                 dict_raw_results["4"] = dict_raw_results.get(
@@ -25,7 +25,9 @@ def reports(src, template_src=os.path.sep.join([".", "results", "template_tuned"
             else:
                 dict_raw_results[str(int(new_line[0]) - 1)] = dict_raw_results.get(
                     str(int(new_line[0]) - 1), []) + [[float(i) for i in new_line[1:4]]]
-    my_class_report(dict_raw_results, his_result, "_summary"+src)
+
+    src = src.split('.')[0] + '_summary.txt'
+    my_class_report(dict_raw_results, his_result, src)
     print("Done!")
 
 
