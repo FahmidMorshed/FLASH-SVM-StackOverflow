@@ -5,6 +5,7 @@ This decade has seen a significant contribution in Machine Learning. But, there 
 
 Paper:
 https://www.overleaf.com/read/hrtrzmrrtybr
+http://tiny.cc/fss18FlashSVMPaper
 
 Presentation Slides:
 http://tiny.cc/fss18FlashSVMPresentation
