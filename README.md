@@ -7,7 +7,4 @@ Paper:
 https://www.overleaf.com/read/hrtrzmrrtybr
 
 Presentation Slides:
-https://docs.google.com/presentation/d/1ro_od2FOV937IJgnTGBLeb-uWdU3WjAsiLXoNSfj24I/edit?usp=sharing
-
-Other Files:
-https://docs.google.com/spreadsheets/d/1HQVt27JcO5oohtRp85PN4A1bJXin8IcBBH6I_fykt1w/edit?usp=sharing
+http://tiny.cc/fss18FlashSVMPresentation
